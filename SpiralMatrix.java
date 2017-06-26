@@ -3,6 +3,8 @@ public class SpiralMatrix {
 	
 	static int[] iterateMatrix(int[][] data)
 	{
+		if(data.length==0)
+			return new int[0];
 		//startrow and endrow represent top and bottom rows of the given matrix
 		//rightcol and leftcol represent left and right cols respectively.
 		int[] output=new int[data.length*data[0].length];//initialize output array with the number of elements in the matrix
@@ -43,7 +45,8 @@ public class SpiralMatrix {
 	public static void main(String[] args)
 	{
 		int[][] data={{1,2,3,4,5},{14,15,16,17,6},{13,20,19,18,7},{12,11,10,9,8}};
-		int[] out=iterateMatrix(data);
+		int[][] a=new int[0][0];
+		int[] out=iterateMatrix(a);
 		for(int i=0;i<out.length;i++)
 		{
 			System.out.print(out[i]+" ");
