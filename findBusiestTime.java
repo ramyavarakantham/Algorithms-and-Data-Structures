@@ -11,36 +11,16 @@ import java.util.Map.Entry;
 class findBusiestTime {
 	
   static int findBusiestPeriod(int[][] data) {
-    // your code goes here
+	/* Uses hashmap to store at each timestamp, count of visitors in the mall. Then finds max of hashmap values.
+	 int count=0;
     HashMap<Integer, Integer> hm=new HashMap<>();
     for(int i=0;i<data.length;i++)
     {
-      if(hm.containsKey(data[i][0]))
-      {
-        if(data[i][2]==1)
-        {
-          hm.put(data[i][0],data[i][1]+hm.get(data[i][0]));
-         // System.out.println(data[i][0]+" "+data[i][1]+hm.get(data[i][0]));
-        }
-          
-        else
-          hm.put(data[i][0],hm.get(data[i][0])-data[i][1]);
-       // System.out.println(data[i][0]+" "+(hm.get(data[i][0])-data[i][1]));
-      }
+      if(data[i][2]==1)
+    	  count+=data[i][1];
       else
-      {
-        if(data[i][2]==1)
-        {
-          hm.put(data[i][0],data[i][1]);
-         // System.out.println(data[i][0]+" "+data[i][1]);
-        }
-        else
-        {
-          hm.put(data[i][0],-data[i][1]);
-         // System.out.println(data[i][0]+" "+ (-data[i][1]));
-          
-        }
-      }
+    	  count-=data[i][1];
+      hm.put(data[i][0], count);
     }
     
     Entry<Integer,Integer> maxEntry = null;
@@ -51,7 +31,32 @@ class findBusiestTime {
         }
     }
     
-   return maxEntry.getKey();
+   return maxEntry.getKey();*/
+	  
+	  //Uses constant space to calculate max num of visitors at any point of time in the mall
+	  //array empty
+	  if(data.length==0)
+		  return 0;
+	  //only one timestamp data in the array
+	  if(data.length==1)
+		  return data[0][0];
+	  //more than one timestamp data present in the array
+	  int count=0, maxcount=0, timestamp=0;
+	  for(int i=0;i<data.length-1;i++)
+	  {
+		  if(data[i][2]==1)
+			  count+=data[i][1];
+		  else
+			  count-=data[i][1];
+		  if(data[i][0]==data[i+1][0])
+			  continue;
+		  if(count>maxcount)
+		  {
+			  maxcount=count;
+			  timestamp=data[i][0];
+		  }
+	  }
+	  return timestamp;
     
   }
 
